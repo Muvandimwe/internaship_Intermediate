@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Stopwatch</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #f9f9f9, #e0f7fa);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .stopwatch-container {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    }
+
+    h2 {
+      color: #00796b;
+      margin-bottom: 20px;
+    }
+
+    #display {
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    button {
+      padding: 10px 18px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #00796b;
+      color: white;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stopwatch-container">
+    <h2>Simple Stopwatch</h2>
+    <div id="display">00:00:00</div>
+    <div class="buttons">
+      <button onclick="start()">Start</button>
+      <button onclick="stop()">Stop</button>
+      <button onclick="reset()">Reset</button>
+    </div>
+  </div>
+
+  <script>
+    let [hours, minutes, seconds] = [0, 0, 0];
+    let display = document.getElementById("display");
+    let interval = null;
+    let running = false;
+
+    function updateDisplay() {
+      let h = hours < 10 ? "0" + hours : hours;
+      let m = minutes < 10 ? "0" + minutes : minutes;
+      let s = seconds < 10 ? "0" + seconds : seconds;
+      display.textContent = `${h}:${m}:${s}`;
+    }
+
+    function start() {
+      if (!running) {
+        running = true;
+        interval = setInterval(() => {
+          seconds++;
+          if (seconds === 60) {
+            seconds = 0;
+            minutes++;
+          }
+          if (minutes === 60) {
+            minutes = 0;
+            hours++;
+          }
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function stop() {
+      running = false;
+      clearInterval(interval);
+    }
+
+    function reset() {
+      stop();
+      [hours, minutes, seconds] = [0, 0, 0];
+      updateDisplay();
+    }
+
+    updateDisplay(); // show 00:00:00 at start
+  </script>
+
+</body>
+</html>

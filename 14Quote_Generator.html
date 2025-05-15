@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inspirational Quote Generator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #ffffff15;
+      padding: 30px 40px;
+      border-radius: 16px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .quote {
+      font-size: 20px;
+      font-weight: 500;
+      color: #fff;
+      min-height: 80px;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .author {
+      margin-top: 15px;
+      font-size: 16px;
+      font-style: italic;
+      color: #ddd;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #f1c40f;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #333;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #d4ac0d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Quote of the Moment</h1>
+    <div class="quote" id="quote">Click the button to get inspired.</div>
+    <div class="author" id="author">-</div>
+    <button onclick="generateQuote()">New Quote</button>
+  </div>
+
+  <script>
+    const quotes = [
+      {
+        text: "The best way to get started is to quit talking and begin doing.",
+        author: "Walt Disney"
+      },
+      {
+        text: "Success is not in what you have, but who you are.",
+        author: "Bo Bennett"
+      },
+      {
+        text: "Your time is limited, so don’t waste it living someone else’s life.",
+        author: "Steve Jobs"
+      },
+      {
+        text: "Believe you can and you're halfway there.",
+        author: "Theodore Roosevelt"
+      },
+      {
+        text: "Hard work beats talent when talent doesn’t work hard.",
+        author: "Tim Notke"
+      },
+      {
+        text: "Dream big and dare to fail.",
+        author: "Norman Vaughan"
+      },
+      {
+        text: "Don’t watch the clock; do what it does. Keep going.",
+        author: "Sam Levenson"
+      },
+      {
+        text: "Everything you’ve ever wanted is on the other side of fear.",
+        author: "George Addair"
+      }
+    ];
+
+    function generateQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const quoteText = quotes[randomIndex].text;
+      const quoteAuthor = quotes[randomIndex].author;
+
+      // Animate quote box
+      const quoteElement = document.getElementById("quote");
+      const authorElement = document.getElementById("author");
+
+      quoteElement.style.opacity = 0;
+      authorElement.style.opacity = 0;
+
+      setTimeout(() => {
+        quoteElement.textContent = `"${quoteText}"`;
+        authorElement.textContent = `– ${quoteAuthor}`;
+        quoteElement.style.opacity = 1;
+        authorElement.style.opacity = 1;
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
